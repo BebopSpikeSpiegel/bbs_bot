@@ -4,6 +4,7 @@
 import telebot
 import base64
 import sys
+import time
 from config import token
 bot = telebot.TeleBot(token)
 
@@ -40,10 +41,12 @@ def base64_decode(message):
 
 
 def keep_running():
-    try:
-        bot.polling()
-    except:
-        bot.keep_running()
+    while True:
+        try:
+            bot.polling(none_stop=True)
+
+        except Exception as e:
+            time.sleep(15)
 
 if __name__ == '__main__':
     keep_running()
