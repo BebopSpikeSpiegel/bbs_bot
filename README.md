@@ -12,5 +12,5 @@ cp -r config-example.py config.py # 复制一份config-example.py取名为config
 ```
 然后编辑config.py, 修改token字符串并填入自己的token
 ```Bash
-python main.py # 启动Bot
+bash run.sh # 启动Bot
 ```
