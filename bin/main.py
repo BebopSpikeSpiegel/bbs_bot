@@ -4,10 +4,16 @@
 import telebot
 import base64
 import sys
-import time
 import re
+import you_get
+import logging
+from time import sleep
 from config import token
+from os import chdir, system, rename
+
 bot = telebot.TeleBot(token)
+logger = telebot.logger
+telebot.logger.setLevel(logging.DEBUG)
 
 # set default encoding to utf-8
 reload(sys)
@@ -51,15 +57,34 @@ def findall_cloudmusic_id(message):
     except:
         bot.reply_to(message, '引发错误! 请确认自己没有输入错误的参数')
 
+@bot.message_handler(commands=['soundcloud'])
+def send_soundcloud(message):
+    try:
+        splited = return_arg(message.text)
+        info = you_get.get_soundcloud_info(splited)
+        title = info[1][1]
+        title = title.replace(' ', '')
+        Type = info[2][1].split()[0].lower()
+        size = info[3][1]
+        filename = title + "." + Type
+        print filename
 
-def keep_running():
-    while True:
-        try:
-            bot.polling(none_stop=True)
+        msg = "正在下载" + title + "(" + size + ")"
+        bot.reply_to(message, msg)
 
-        except Exception as e:
-            time.sleep(15)
+        chdir("/home/pi/github/bbs_bot/downloads/")
+        system('you-get -O '+ '"' + title + '"' + " " + splited)
+
+        dl_dir = '/home/pi/github/bbs_bot/downloads/' + filename
+        music = open(dl_dir, 'rb')
+        bot.send_audio(message.chat.id, music)
+
+        sleep(5)
+        system("rm " + filename)
+    except:
+        bot.reply_to(message, '引发错误! 请确认自己没有输入错误的参数')
+
 
 if __name__ == '__main__':
-    keep_running()
+    bot.polling()
 

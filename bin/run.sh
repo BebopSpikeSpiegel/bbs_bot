@@ -1,14 +1,11 @@
-#!/usr/bin/env python
+python /home/pi/github/bbs_bot/bin/main.py
 
 
-`python main.py`
-
-
-while [ $? -ne 0 ]
+while :
 
 do
 	 echo 'Restarting Bot...'
 
-	 `python main.py`
+	 python /home/pi/github/bbs_bot/bin/main.py
 
 done
