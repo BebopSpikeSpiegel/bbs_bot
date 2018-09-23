@@ -30,33 +30,32 @@ def return_arg(str):
     'return arg from command'
     return str.split(" ", 1)[1]
 
-def try_except(func):
-    
-    def wrapper(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except:
-            bot.reply_to(args, '引发错误! 请确认自己没有输入错误的参数')
+def try_except(message):
+    def decorator(func):
+            def wrapper(*args, **kwargs):
+                try:
+                    return func(*args, **kwargs)
+                except:
+                    bot.reply_to(message, '引发错误! 请确认自己没有输入错误的参数')
+            return wrapper
+    return decorator
 
-    return wrapper()
-
-
-@bot.message_handler(commands=['b64encode'])
 @try_except
+@bot.message_handler(commands=['b64encode'])
 def base64_encode(message):
     splited = return_arg(message.text)
     handled = base64.b64encode(splited)
     bot.reply_to(message, handled)
 
-@bot.message_handler(commands=['b64decode'])
 @try_except
+@bot.message_handler(commands=['b64decode'])
 def base64_decode(message):
     splited = return_arg(message.text)
     handled = base64.b64decode(splited)
     bot.reply_to(message, handled)
 
-@bot.message_handler(commands=['cloudmusic'])
 @try_except
+@bot.message_handler(commands=['cloudmusic'])
 def findall_cloudmusic_id(message):
     splited = return_arg(message.text)
     handled = re.findall('\d+', re.search('song.*userid?', splited).group())[0]
@@ -64,8 +63,8 @@ def findall_cloudmusic_id(message):
     bot.reply_to(message, copyable, parse_mode="Markdown")
     #bot.send_message(message.chat.id, handled, parse_mode="Markdown")
 
-@bot.message_handler(commands=['soundcloud'])
 @try_except
+@bot.message_handler(commands=['soundcloud'])
 def send_soundcloud(message):
     splited = return_arg(message.text)
     info = you_get.get_soundcloud_info(splited)
