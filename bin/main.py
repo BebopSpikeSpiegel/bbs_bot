@@ -66,6 +66,9 @@ def findall_cloudmusic_id(message):
 @try_except
 @bot.message_handler(commands=['soundcloud'])
 def send_soundcloud(message):
+    chdir("/home/pi/github/bbs_bot/downloads/")
+    system("rm *")
+
     splited = return_arg(message.text)
     info = you_get.get_soundcloud_info(splited)
     title = info[1][1]
@@ -78,7 +81,6 @@ def send_soundcloud(message):
     msg = "正在下载" + title + "(" + size + ")"
     bot.reply_to(message, msg)
 
-    chdir("/home/pi/github/bbs_bot/downloads/")
     system('you-get -O '+ '"' + title + '"' + " " + splited)
 
     dl_dir = '/home/pi/github/bbs_bot/downloads/' + filename
