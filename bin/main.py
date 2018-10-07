@@ -9,7 +9,7 @@ import you_get
 import logging
 from time import sleep
 from config import token
-from os import chdir, system, rename
+from os import chdir, system, rename, listdir
 
 bot = telebot.TeleBot(token)
 
@@ -76,15 +76,18 @@ def send_soundcloud(message):
     Type = info[2][1].split()[0].lower()
     size = info[3][1]
     filename = title + "." + Type
-    print filename
+    #print filename
 
     msg = "正在下载" + title + "(" + size + ")"
     bot.reply_to(message, msg)
 
-    system('you-get -O '+ '"' + title + '"' + " " + splited)
+    system('you-get ' + splited)
+
 
     dl_dir = '/home/pi/github/bbs_bot/downloads/' + filename
-    music = open(dl_dir, 'rb')
+    files = listdir('/home/pi/github/bbs_bot/downloads/')
+    osfilename = files[0]
+    music = open(osfilename, 'rb')
     bot.send_audio(message.chat.id, music)
 
     sleep(5)
