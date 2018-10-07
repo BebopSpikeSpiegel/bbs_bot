@@ -73,7 +73,7 @@ def send_soundcloud(message):
         os.makedirs(dl_dir)
 
     os.chdir(dl_dir)
-    system("rm *")
+    os.system("rm *")
 
     splited = return_arg(message.text)
     info = you_get.get_soundcloud_info(splited)
@@ -87,17 +87,17 @@ def send_soundcloud(message):
     msg = "正在下载" + title + "(" + size + ")"
     bot.reply_to(message, msg)
 
-    system('you-get ' + splited)
+    os.system('you-get ' + splited)
 
 
     dl_dir = '/home/pi/github/bbs_bot/downloads/' + filename
-    files = listdir('/home/pi/github/bbs_bot/downloads/')
+    files = os.listdir('/home/pi/github/bbs_bot/downloads/')
     osfilename = files[0]
     music = open(osfilename, 'rb')
     bot.send_audio(message.chat.id, music)
 
     sleep(5)
-    system("rm *")
+    os.system("rm *")
 
 
 if __name__ == '__main__':
