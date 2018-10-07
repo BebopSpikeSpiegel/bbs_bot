@@ -1,5 +1,6 @@
 # custom config
 bin/config.py
+downloads/
 
 
 # Byte-compiled / optimized / DLL files

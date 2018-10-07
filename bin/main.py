@@ -9,7 +9,7 @@ import you_get
 import logging
 from time import sleep
 from config import token
-from os import chdir, system, rename, listdir
+import os
 
 bot = telebot.TeleBot(token)
 
@@ -66,7 +66,13 @@ def findall_cloudmusic_id(message):
 @try_except
 @bot.message_handler(commands=['soundcloud'])
 def send_soundcloud(message):
-    chdir("/home/pi/github/bbs_bot/downloads/")
+    dl_dir = "/home/pi/github/bbs_bot/downloads/"
+    if os.path.exists(dl_dir):
+        pass
+    else:
+        os.makedirs(dl_dir)
+
+    os.chdir(dl_dir)
     system("rm *")
 
     splited = return_arg(message.text)
