@@ -9,4 +9,4 @@
 使用run.sh启动bot
 
 ## 鸣谢
-清华带哥github[@THUzhangga](https://github.com/THUzhangga/ "用户页")的[NMSL](https://github.com/THUzhangga/NMSL/ "项目地址")项目(Abstraction your words)，偷了他丶代码������
+清华带哥github[@THUzhangga](https://github.com/THUzhangga/ "用户页")的[NMSL](https://github.com/THUzhangga/NMSL/ "项目地址")项目(Abstraction your words)，偷了他丶代码🤭
