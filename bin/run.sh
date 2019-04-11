@@ -1,4 +1,4 @@
-python /home/pi/github/bbs_bot/bin/main.py
+python3 /home/pi/github/bbs_bot/bin/main.py
 
 
 while :
@@ -6,6 +6,6 @@ while :
 do
 	 echo 'Restarting Bot...'
 
-	 python /home/pi/github/bbs_bot/bin/main.py
+	 python3 /home/pi/github/bbs_bot/bin/main.py
 
 done

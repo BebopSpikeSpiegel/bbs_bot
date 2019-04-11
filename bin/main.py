@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding:utf-8 -*-
 
 import telebot
@@ -18,8 +18,7 @@ bot = telebot.TeleBot(token)
 #telebot.logger.setLevel(logging.DEBUG)
 
 # set default encoding to utf-8
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#sys.setdefaultencoding('utf-8')
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -98,6 +97,16 @@ def send_soundcloud(message):
 
     sleep(5)
     os.system("rm *")
+
+
+from nmsl_local import text_to_emoji as nmsl
+@try_except
+@bot.message_handler(commands=['nmsl'])
+def nmslwsngg(message):
+    splited = return_arg(message.text)
+    text_with_emoji = nmsl(splited, 0)
+    copyable = '`%s`' % text_with_emoji
+    bot.reply_to(message, copyable, parse_mode="Markdown")
 
 
 if __name__ == '__main__':

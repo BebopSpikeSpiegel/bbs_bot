@@ -11,7 +11,7 @@ def get_u2b_info(url, debug = False):
     exec_cmd = subprocess.Popen(cmd, shell = True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     log = exec_cmd.communicate()
     if debug:
-        print log[0]
+        print(log[0])
     return log[0]
 
 def format_log(log):
@@ -46,9 +46,9 @@ def format_log(log):
 
 def dl_u2b(dir, itag, url):
     chdir(dir)
-    print "正在将视频下载至" + dir + "目录..."
+    print("正在将视频下载至" + dir + "目录...")
     system("you-get --itag=" + itag + " " + url)
-    print "Finished"
+    print("Finished")
 
 def get_soundcloud_info(url):
     cmd = "you-get --info " + url
@@ -64,7 +64,7 @@ def get_soundcloud_info(url):
 def dl_soundcloud(dir, url):
     chdir(dir)
     info = get_soundcloud_info(url)
-    print "正在下载" + info[1][1] + "至" + dir + "目录(" + info[3][1] + ")"
+    print("正在下载" + info[1][1] + "至" + dir + "目录(" + info[3][1] + ")")
     system("you-get " + url)
 
 
