@@ -43,14 +43,14 @@ def try_except(message):
 @bot.message_handler(commands=['b64encode'])
 def base64_encode(message):
     splited = return_arg(message.text)
-    handled = base64.b64encode(splited)
+    handled = base64.b64encode(splited.encode())
     bot.reply_to(message, handled)
 
 @try_except
 @bot.message_handler(commands=['b64decode'])
 def base64_decode(message):
     splited = return_arg(message.text)
-    handled = base64.b64decode(splited)
+    handled = base64.b64decode(splited.encode())
     bot.reply_to(message, handled)
 
 @try_except
